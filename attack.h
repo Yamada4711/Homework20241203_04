@@ -1,10 +1,12 @@
 #pragma once
 
+class Character;
+
 class Attack
 {
 public:
-	bool AttackPhysicsAndDead(int str, int vit, int* pHp);
-	bool AttackMagicAndDead(int* pHp, int* pVit, int* pMp, int opponentAttribute, int myAttribute);
+	bool AttackPhysicsAndDead(Character* pCA, Character* pCB);
+	bool AttackMagicAndDead(Character* pCA, Character* pCB);
 protected:
 
 	enum Attribute

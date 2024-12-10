@@ -16,6 +16,8 @@ public:
 
 	void ShowStatus();
 
+	Character GetCharacter();
+
 	enum Name
 	{
 		SLIME =  0, // –³‘®«

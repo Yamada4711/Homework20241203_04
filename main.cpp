@@ -9,5 +9,5 @@ int main()
 {
 	srand((unsigned int)time(NULL));
 	Player player;
-	player.PlayerTurn();
+	player.PlayerTurn(player);
 }

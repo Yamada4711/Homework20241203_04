@@ -40,7 +40,7 @@ void Player::ShowStatus()
 	cout << endl;
 }
 
-bool Player::PlayerTurn()
+bool Player::PlayerTurn(Player player)
 {
 	while (true)
 	{
@@ -100,7 +100,7 @@ bool Player::PlayerTurn()
 				}
 				else if (move == 2)
 				{
-					enemyDead = attack.AttackMagicAndDead(enemy.GetPHp(), enemy.GetPVit(), &mp, enemy.GetAttribute(), attribute);
+					enemyDead = attack.AttackMagicAndDead(&player, &enemy);
 					enemy.ShowStatus();
 				}
 				else

@@ -1,4 +1,5 @@
 #include "attack.h"
+#include "character.h"
 #include <iostream>
 using namespace std;
 
@@ -16,34 +17,33 @@ int CalculationDamage(int str, int vit)
 	}
 }
 
-bool Attack::AttackPhysicsAndDead(int str, int vit, int* pHp)
+bool Attack::AttackPhysicsAndDead(Character* pCA, Character* pCB)
 {
-	int damage = CalculationDamage(str, vit);
-	if (*pHp - damage > 0)
+	int damage = CalculationDamage(pCA->GetStr(), pCB->GetVit());
+	pCB->SetHp(damage);
+	if (pCB->GetHp() == 0)
 	{
-		*pHp -= damage;
-		return false; // 相手は死んでない
+		return true;
 	}
 	else
 	{
-		*pHp = 0;
-		return true; // 相手は死んだ
+		return false;
 	}
 }
 
-bool Attack::AttackMagicAndDead(int* pHp, int* pVit, int* pMp, int opponentAttribute, int myAttribute)
+bool Attack::AttackMagicAndDead(Character* pCA, Character* pCB)
 {
 	const char* attribute[] = { "無", "火", "水", "岩", "風" };
-	cout << attribute[myAttribute] << "属性の魔法を放った" << endl;
-	if (*pMp > 0)
+	cout << attribute[pCA->GetAttribute()] << "属性の魔法を放った" << endl;
+	if (pCA->GetMp() > 0)
 	{
-		--*pMp;
+		pCA->SetMp();
 		int damage = 0;
-		switch (opponentAttribute)
+		switch (pCB->GetAttribute())
 		{
 		case FIRE:
 			cout << "魔法耐性が高いようだ" << endl;
-			if (myAttribute == WATER)
+			if (pCA->GetAttribute() == WATER)
 			{
 				damage = 2;
 			}
@@ -54,15 +54,15 @@ bool Attack::AttackMagicAndDead(int* pHp, int* pVit, int* pMp, int opponentAttri
 			cout << damage << "ダメージ！" << endl;
 			break;
 		case WATER:
-			if (myAttribute == FIRE)
+			if (pCA->GetAttribute() == FIRE)
 			{
 				cout << "0ダメージ！" << endl
 					<< "水の膜が蒸発した！物理攻撃が有効になった！" << endl;
 				damage = 0;
-				*pVit = 0;
+				pCB->SetVit();
 				break;
 			}
-			else if (myAttribute == ROCK)
+			else if (pCA->GetAttribute() == ROCK)
 			{
 				damage = 5;
 			}
@@ -73,11 +73,11 @@ bool Attack::AttackMagicAndDead(int* pHp, int* pVit, int* pMp, int opponentAttri
 			cout << damage << "ダメージ！" << endl;
 			break;
 		case ROCK:
-			if (myAttribute == WIND)
+			if (pCA->GetAttribute() == WIND)
 			{
 				damage = 5;
 			}
-			else if (myAttribute == WATER)
+			else if (pCA->GetAttribute() == WATER)
 			{
 				cout << "この属性はあまり効果がないようだ" << endl;
 				damage = 1;
@@ -90,7 +90,7 @@ bool Attack::AttackMagicAndDead(int* pHp, int* pVit, int* pMp, int opponentAttri
 			break;
 		case WIND:
 			cout << "魔法耐性が高いようだ" << endl;
-			if (myAttribute == FIRE)
+			if (pCA->GetAttribute() == FIRE)
 			{
 				damage = 2;
 			}
@@ -102,15 +102,14 @@ bool Attack::AttackMagicAndDead(int* pHp, int* pVit, int* pMp, int opponentAttri
 		default:
 			break;
 		}
-		if (*pHp - damage > 0)
+		pCB->SetHp(damage);
+		if (pCB->GetHp() == 0)
 		{
-			*pHp -= damage;
-			return false; // 相手は生きている
+			return true;
 		}
 		else
 		{
-			*pHp = 0;
-			return true; // 相手は死んだ
+			return false;
 		}
 	}
 	else
