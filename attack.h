@@ -5,8 +5,8 @@ class Character;
 class Attack
 {
 public:
-	bool AttackPhysicsAndDead(Character* pCA, Character* pCB);
-	bool AttackMagicAndDead(Character* pCA, Character* pCB);
+	static bool AttackPhysicsAndDead(Character* pCA, Character* pCB);
+	static bool AttackMagicAndDead(Character* pCA, Character* pCB);
 protected:
 
 	enum Attribute

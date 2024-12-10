@@ -1,4 +1,6 @@
 #include "enemy.h"
+#include "attack.h"
+#include "player.h"
 #include <iostream>
 using namespace std;
 
@@ -36,19 +38,19 @@ void Enemy::ShowStatus()
 	cout << endl;
 }
 
-bool Enemy::AttackAI(Attack& attack, const int pStr, int* ppVit, int pVit, int* ppHp, int pAttribute)
+bool Enemy::AttackAI(Character* pCB, Enemy* enemy)
 {
-	if ((pAttribute == 2 && attribute == 1 && *ppVit > 0) || // 相手　水属性　かつ　自分　火属性　かつ　相手　水防御中
-		pAttribute == 2 && attribute == 3 ||				// 相手　水属性　かつ　自分　岩属性
-		pAttribute == 4 && attribute == 1 ||				// 相手　風属性　かつ　自分　火属性
+	if ((pCB->GetAttribute() == 2 && attribute == 1 && pCB->GetVit() > 0) || // 相手　水属性　かつ　自分　火属性　かつ　相手　水防御中
+		pCB->GetAttribute() == 2 && attribute == 3 ||				// 相手　水属性　かつ　自分　岩属性
+		pCB->GetAttribute() == 4 && attribute == 1 ||				// 相手　風属性　かつ　自分　火属性
 		attribute == 4 ||									// 自分　風属性
-		pAttribute == 1)									// 相手　火属性
+		pCB->GetAttribute() == 1)									// 相手　火属性
 	{
-		return attack.AttackMagicAndDead(ppHp, ppVit, &mp, pAttribute, attribute);
+		return Attack::AttackMagicAndDead(enemy, pCB);
 	}
 	else
 	{
-		return attack.AttackPhysicsAndDead(str, pVit, ppHp);
+		return Attack::AttackPhysicsAndDead(enemy, pCB);
 	}
 }
 

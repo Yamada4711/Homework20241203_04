@@ -105,7 +105,7 @@ bool Player::PlayerTurn(Player player)
 				}
 				else
 				{
-					enemyDead = attack.AttackPhysicsAndDead(str, enemy.GetVit(), enemy.GetPHp());
+					enemyDead = attack.AttackPhysicsAndDead(&player, &enemy);
 					enemy.ShowStatus();
 				}
 				if (enemyDead)
@@ -114,7 +114,7 @@ bool Player::PlayerTurn(Player player)
 					cout << endl;
 					break;
 				}
-				dead = enemy.AttackAI(attack, str, &vit, vit, &hp, attribute);
+				dead = enemy.AttackAI(&player, &enemy);
 				ShowStatus();
 				if (dead)
 				{

@@ -4,7 +4,7 @@
 #include "enemy.h"
 
 class Player :
-	Character
+	public Character
 {
 public:
 	Player();

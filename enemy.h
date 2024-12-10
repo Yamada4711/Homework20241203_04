@@ -2,21 +2,21 @@
 #include "character.h"
 #include "attack.h"
 
+class Player;
+
 class Enemy :
-	Character
+	public Character
 {
 public:
 	Enemy();
 
-	bool AttackAI(Attack& attack, const int pStr, int* ppVit, int pVit, int* ppHp, int pAttribute);
+	bool AttackAI(Character* pCB, Enemy* enemy);
 	int* GetPHp();
 	int* GetPVit();
 	int GetVit();
 	int GetAttribute();
 
 	void ShowStatus();
-
-	Character GetCharacter();
 
 	enum Name
 	{
