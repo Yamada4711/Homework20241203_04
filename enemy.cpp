@@ -54,23 +54,3 @@ bool Enemy::AttackAI(Character* pCB, Enemy* enemy)
 		return Attack::AttackPhysicsAndDead(enemy, pCB);
 	}
 }
-
-int* Enemy::GetPHp()
-{
-	return &hp;
-}
-
-int* Enemy::GetPVit()
-{
-	return &vit;
-}
-
-int Enemy::GetVit()
-{
-	return vit;
-}
-
-int Enemy::GetAttribute()
-{
-	return attribute;
-}
