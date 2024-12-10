@@ -20,7 +20,7 @@ int CalculationDamage(int str, int vit)
 bool Attack::AttackPhysicsAndDead(Character* pCA, Character* pCB)
 {
 	int damage = CalculationDamage(pCA->GetStr(), pCB->GetVit());
-	pCB->SetHp(damage);
+	pCB->ReduceHp(damage);
 	if (pCB->GetHp() == 0)
 	{
 		return true;
@@ -37,7 +37,7 @@ bool Attack::AttackMagicAndDead(Character* pCA, Character* pCB)
 	cout << attribute[pCA->GetAttribute()] << "‘®«‚Ì–‚–@‚ð•ú‚Á‚½" << endl;
 	if (pCA->GetMp() > 0)
 	{
-		pCA->SetMp();
+		pCA->DecrementMp();
 		int damage = 0;
 		int critical = -1;
 		switch (pCB->GetAttribute())
@@ -139,7 +139,7 @@ bool Attack::AttackMagicAndDead(Character* pCA, Character* pCB)
 		default:
 			break;
 		}
-		pCB->SetHp(damage);
+		pCB->ReduceHp(damage);
 		if (pCB->GetHp() == 0)
 		{
 			return true;

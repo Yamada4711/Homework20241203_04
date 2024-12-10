@@ -1,6 +1,6 @@
 #include "character.h"
 
-void Character::SetHp(int damage)
+void Character::ReduceHp(int damage)
 {
 	if (damage > hp)
 	{
@@ -17,7 +17,7 @@ int Character::GetHp() const
 	return hp;
 }
 
-void Character::SetMp()
+void Character::DecrementMp()
 {
 	if (mp > 0)
 	{

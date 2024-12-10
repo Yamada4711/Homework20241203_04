@@ -11,9 +11,9 @@ protected:
 	int attribute;
 
 public:
-	void SetHp(int damage);
+	void ReduceHp(int damage);
 	int GetHp() const;
-	void SetMp();
+	void DecrementMp();
 	int GetMp() const;
 	void SetVit();
 	int GetVit() const;
