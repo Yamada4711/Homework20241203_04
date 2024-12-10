@@ -12,11 +12,11 @@ protected:
 
 public:
 	void SetHp(int damage);
-	int GetHp();
+	int GetHp() const;
 	void SetMp();
-	int GetMp();
+	int GetMp() const;
 	void SetVit();
-	int GetVit();
-	int GetStr();
-	int GetAttribute();
+	int GetVit() const;
+	int GetStr() const;
+	int GetAttribute() const;
 };

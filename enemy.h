@@ -11,10 +11,6 @@ public:
 	Enemy();
 
 	bool AttackAI(Character* pCB, Enemy* enemy);
-	int* GetPHp();
-	int* GetPVit();
-	int GetVit();
-	int GetAttribute();
 
 	void ShowStatus();
 

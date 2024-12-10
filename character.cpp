@@ -12,17 +12,24 @@ void Character::SetHp(int damage)
 	}
 }
 
-int Character::GetHp()
+int Character::GetHp() const
 {
 	return hp;
 }
 
 void Character::SetMp()
 {
-	mp--;
+	if (mp > 0)
+	{
+		mp--;
+	}
+	else
+	{
+		mp = 0;
+	}
 }
 
-int Character::GetMp()
+int Character::GetMp() const
 {
 	return mp;
 }
@@ -32,17 +39,17 @@ void Character::SetVit()
 	vit = 0;
 }
 
-int Character::GetVit()
+int Character::GetVit() const 
 {
 	return vit;
 }
 
-int Character::GetStr()
+int Character::GetStr() const
 {
 	return str;
 }
 
-int Character::GetAttribute()
+int Character::GetAttribute() const
 {
 	return attribute;
 }
