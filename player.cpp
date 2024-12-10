@@ -7,8 +7,8 @@ Player::Player()
 	//	{ 人間, ドワーフ, 人魚, 獣人, エルフ }
 	const int hpArr[] =			{ 40, 60, 40, 50, 30 };
 	const int mpArr[] =			{  0, 20, 30, 10, 50 };
-	const int vitArr[] =		{  3,  4,  5,  4,  2 };
-	const int strArr[] =		{ 10,  5,  4,  7,  1 };
+	const int vitArr[] =		{  2,  3,  4,  3,  2 };
+	const int strArr[] =		{ 10,  5,  4,  7,  2 };
 	const int attributeArr[] =	{  0,  1,  2,  3,  4 };
 
 	cout << "種族は何ですか？" << endl;
@@ -40,7 +40,7 @@ void Player::ShowStatus()
 	cout << endl;
 }
 
-bool Player::PlayerTurn(Player player)
+bool Player::PlayerTurn(Player* player)
 {
 	while (true)
 	{
@@ -56,6 +56,7 @@ bool Player::PlayerTurn(Player player)
 		}
 		move = 0;
 
+		cout << endl;
 		int event = rand() % 5;
 		switch (event)
 		{
@@ -73,10 +74,12 @@ bool Player::PlayerTurn(Player player)
 			break;
 		case 1:
 			cout << "回復の泉だ! HPが全回復した" << endl;
+			cout << endl;
 			hp = maxHp;
 			break;
 		default:
 			cout << "敵襲だ！" << endl;
+			cout << endl;
 			Enemy enemy;
 			Attack attack;
 			bool enemyDead = false;
@@ -89,6 +92,7 @@ bool Player::PlayerTurn(Player player)
 				cin >> move;
 				if (move == 3)
 				{
+					cout << endl;
 					cout << "プレイヤーは逃げ出した" << endl;
 					int escape = rand() % 10;
 					if (escape != 1)
@@ -97,24 +101,31 @@ bool Player::PlayerTurn(Player player)
 						cout << endl;
 						break;
 					}
+					else
+					{
+						cout << "逃走に失敗した" << endl;
+					}
+					cout << endl;
 				}
 				else if (move == 2)
 				{
-					enemyDead = attack.AttackMagicAndDead(&player, &enemy);
+					enemyDead = attack.AttackMagicAndDead(player, &enemy);
 					enemy.ShowStatus();
 				}
 				else
 				{
-					enemyDead = attack.AttackPhysicsAndDead(&player, &enemy);
+					enemyDead = attack.AttackPhysicsAndDead(player, &enemy);
 					enemy.ShowStatus();
 				}
+				cout << endl;
 				if (enemyDead)
 				{
 					cout << "敵を倒した!" << endl;
 					cout << endl;
 					break;
 				}
-				dead = enemy.AttackAI(&player, &enemy);
+				dead = enemy.AttackAI(player, &enemy);
+				cout << endl;
 				ShowStatus();
 				if (dead)
 				{
@@ -128,6 +139,7 @@ bool Player::PlayerTurn(Player player)
 		{
 			cout << "プレイヤーは力尽きた" << endl;
 			cout << endl;
+			break;
 		}
 	}
 }

@@ -11,7 +11,7 @@ public:
 
 	void ShowStatus();
 
-	bool PlayerTurn(Player player);
+	bool PlayerTurn(Player* player);
 
 
 	enum Race

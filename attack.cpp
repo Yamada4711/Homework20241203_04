@@ -39,17 +39,36 @@ bool Attack::AttackMagicAndDead(Character* pCA, Character* pCB)
 	{
 		pCA->SetMp();
 		int damage = 0;
+		int critical = -1;
 		switch (pCB->GetAttribute())
 		{
 		case FIRE:
 			cout << "魔法耐性が高いようだ" << endl;
+			cout << endl;
+			critical = rand() % 5;
 			if (pCA->GetAttribute() == WATER)
 			{
-				damage = 2;
+				if (critical == 0)
+				{
+					cout << "大魔法で耐性に打ち勝った" << endl;
+					damage = 7;
+				}
+				else
+				{
+					damage = 2;
+				}
 			}
 			else
 			{
-				damage = 0;
+				if (critical == 0)
+				{
+					cout << "大魔法で耐性に打ち勝った" << endl;
+					damage = 5;
+				}
+				else
+				{
+					damage = 0;
+				}
 			}
 			cout << damage << "ダメージ！" << endl;
 			break;
@@ -90,13 +109,31 @@ bool Attack::AttackMagicAndDead(Character* pCA, Character* pCB)
 			break;
 		case WIND:
 			cout << "魔法耐性が高いようだ" << endl;
+			cout << endl;
+			critical = rand() % 5;
 			if (pCA->GetAttribute() == FIRE)
 			{
-				damage = 2;
+				if (critical == 0)
+				{
+					cout << "大魔法で耐性に打ち勝った" << endl;
+					damage = 7;
+				}
+				else
+				{
+					damage = 2;
+				}
 			}
 			else
 			{
-				damage = 0;
+				if (critical == 0)
+				{
+					cout << "大魔法で耐性に打ち勝った" << endl;
+					damage = 5;
+				}
+				else
+				{
+					damage = 0;
+				}
 			}
 			cout << damage << "ダメージ！" << endl;
 		default:

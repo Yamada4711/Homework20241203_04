@@ -44,6 +44,7 @@ bool Enemy::AttackAI(Character* pCB, Enemy* enemy)
 		pCB->GetAttribute() == 2 && attribute == 3 ||				// 相手　水属性　かつ　自分　岩属性
 		pCB->GetAttribute() == 4 && attribute == 1 ||				// 相手　風属性　かつ　自分　火属性
 		attribute == 4 ||									// 自分　風属性
+		pCB->GetAttribute() == 0 ||							// 相手　無属性
 		pCB->GetAttribute() == 1)									// 相手　火属性
 	{
 		return Attack::AttackMagicAndDead(enemy, pCB);
